@@ -1,4 +1,4 @@
-package com.kcedro.monolithbankappl;
+package com.kcedro.monolithbankapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

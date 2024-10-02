@@ -1,4 +1,4 @@
-package com.kcedro.monolithbankappl;
+package com.kcedro.monolithbankapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
