@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monolith-bank-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-monolith
+  template:
+    metadata:
+      labels:
+        app: java-monolith
+    spec:
+      containers:
+        - name: monolith-bank-app-container
+          image: monolith-bank-app-image:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
