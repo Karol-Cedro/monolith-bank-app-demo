@@ -5,15 +5,25 @@ import static java.lang.Thread.sleep;
 @org.springframework.stereotype.Service
 public class UserOperationService {
 
-    public void login () throws InterruptedException {
-        sleep(200);
+    private final UserSessionService userSessionService;
+
+    private final NotificationService notificationService;
+
+    public UserOperationService(UserSessionService userSessionService, NotificationService notificationService) {
+        this.userSessionService = userSessionService;
+        this.notificationService = notificationService;
     }
 
-    public void register () throws InterruptedException {
-        sleep(200);
+    public void login () throws InterruptedException {
+        sleep(1000); // time needed to provide logging credentials
+        userSessionService.createSession();
+        notificationService.sendSmsNotificationWithPIN();
     }
 
     public void editUserData () throws InterruptedException {
-        sleep(200);
+        if(userSessionService.isUserLoggedIn()) {
+            sleep(20000); // time needed to make some changes in profile
+            notificationService.sendSmsNotificationWithPIN();
+        }
     }
 }

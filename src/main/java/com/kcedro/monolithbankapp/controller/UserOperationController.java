@@ -3,9 +3,10 @@ package com.kcedro.monolithbankapp.controller;
 import com.kcedro.monolithbankapp.service.UserOperationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/bank-demo-app")
+@RestController
 public class UserOperationController {
 
     UserOperationService userOperationService;
@@ -17,18 +18,13 @@ public class UserOperationController {
     @PostMapping("/login")
     public ResponseEntity<String> auth() throws InterruptedException {
         userOperationService.login();
-        return ResponseEntity.ok("logging in ...");
+        return ResponseEntity.ok("logged in");
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register() throws InterruptedException {
-        this.userOperationService.register();
-        return ResponseEntity.ok("register new user ...");
-    }
 
     @PostMapping("/edit-user-data")
     public ResponseEntity<String> editUserData() throws InterruptedException {
         this.userOperationService.editUserData();
-        return ResponseEntity.ok("edit user data ...");
+        return ResponseEntity.ok("user data edited");
     }
 }
