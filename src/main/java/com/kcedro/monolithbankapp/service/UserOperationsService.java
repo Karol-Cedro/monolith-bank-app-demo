@@ -3,13 +3,13 @@ package com.kcedro.monolithbankapp.service;
 import static java.lang.Thread.sleep;
 
 @org.springframework.stereotype.Service
-public class UserOperationService {
+public class UserOperationsService {
 
     private final UserSessionService userSessionService;
 
     private final NotificationService notificationService;
 
-    public UserOperationService(UserSessionService userSessionService, NotificationService notificationService) {
+    public UserOperationsService(UserSessionService userSessionService, NotificationService notificationService) {
         this.userSessionService = userSessionService;
         this.notificationService = notificationService;
     }
