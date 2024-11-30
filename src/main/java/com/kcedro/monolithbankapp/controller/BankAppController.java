@@ -1,0 +1,56 @@
+package com.kcedro.monolithbankapp.controller;
+
+
+import com.kcedro.monolithbankapp.constants.OperationsConstants;
+import com.kcedro.monolithbankapp.dto.OperationDto;
+import com.kcedro.monolithbankapp.dto.ResponseDto;
+import com.kcedro.monolithbankapp.entity.Operation;
+import com.kcedro.monolithbankapp.service.IBankAppService;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Validated
+@RestController
+@RequestMapping(path = "/api/v1/operations", produces = {MediaType.APPLICATION_JSON_VALUE})
+public class BankAppController {
+
+    IBankAppService bankAppService;
+
+    @PostMapping("/withdraw")
+    public ResponseEntity<ResponseDto> withdraw(@Valid @RequestBody OperationDto operationDto) {
+        boolean status = bankAppService.withdraw(operationDto);
+
+        if (status) {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(new ResponseDto(OperationsConstants.STATUS_200, OperationsConstants.MESSAGE_200));
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(OperationsConstants.STATUS_417, OperationsConstants.MESSAGE_417_WITHDRAW));
+        }
+    }
+
+    @PostMapping("/deposit")
+    public ResponseEntity<ResponseDto> deposit(@Valid @RequestBody OperationDto operationDto) {
+        bankAppService.deposit(operationDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ResponseDto(OperationsConstants.STATUS_200, OperationsConstants.MESSAGE_200));
+    }
+
+    @GetMapping("/get-history")
+    public ResponseEntity<List<Operation>> getOperationsHistory(@RequestParam Long accountId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(bankAppService.getOperationsHistory(accountId));
+    }
+}

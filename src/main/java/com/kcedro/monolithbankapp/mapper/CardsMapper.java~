@@ -1,0 +1,22 @@
+package com.kcedro.monolithbankapp.mapper;
+
+import com.kcedro.cards.dto.CardDto;
+import com.kcedro.cards.entity.Card;
+
+public class CardsMapper {
+
+    public static CardDto mapToCardsDto(Card card, CardDto cardDto) {
+        cardDto.setCardNumber(card.getCardNumber());
+        cardDto.setTotalLimit(card.getTotalLimit());
+        cardDto.setAvailableAmount(card.getAvailableAmount());
+        return cardDto;
+    }
+
+    public static Card mapToCards(CardDto cardDto, Card card) {
+        card.setOwnerName(cardDto.getOwnerName());
+        card.setOwnerSurname(cardDto.getOwnerSurname());
+        card.setAccountId(cardDto.getAccountId());
+        return card;
+    }
+
+}
