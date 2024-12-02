@@ -7,6 +7,6 @@ spec:
     app: java-monolith
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+      port: 9000
+      targetPort: 9000
+  type: ClusterIP

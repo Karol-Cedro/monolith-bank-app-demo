@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: monolith-bank-app-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: java-monolith
@@ -15,8 +15,9 @@ spec:
       containers:
         - name: monolith-bank-app-container
           image: monolith-bank-app-image:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 8080
+            - containerPort: 9000
           resources:
             requests:
               memory: "512Mi"

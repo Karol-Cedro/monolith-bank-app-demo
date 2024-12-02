@@ -9,7 +9,7 @@ deploy-on-minikube:
 	kubectl apply -f deployment/
 
 clear-ports:
-	sudo lsof -i :9000 -t | xargs sudo kill -9
+ 	sudo lsof -i :9000 -t | xargs sudo kill -9
 
 forward-ports:
 	kubectl port-forward svc/monolith-bank-app-service 9000:9000
